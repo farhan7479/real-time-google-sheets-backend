@@ -10,7 +10,7 @@ const authRouter = require("./Routes/auth");
 const DocumentRouter = require("./Routes/document");
 
 // Mongoose Connection
-mongoose.connect("mongodb://localhost/google-docs-clone", {
+mongoose.connect(`mongodb+srv://Garv:${process.env.MONGO_PASSWORD}@sheets.sizfdlc.mongodb.net/?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://sheets-theta.vercel.app"],
     methods: ["GET", "POST"],
   })
 );
@@ -36,7 +36,7 @@ const server = app.listen(3001, () => {
 // Socket Setup
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000", // Update with your client's origin
+    origin: ["http://localhost:3000", "https://sheets-theta.vercel.app"], 
     methods: ["GET", "POST"],
   },
 });
