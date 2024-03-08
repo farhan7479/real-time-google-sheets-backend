@@ -8,16 +8,20 @@ const socketIO = require("socket.io");
 const { ObjectId } = require("mongoose").Types;
 const authRouter = require("./Routes/auth");
 const DocumentRouter = require("./Routes/document");
+const  connectDB  = require("./config/conn.js");
+const dotenv = require("dotenv");
 
-// Mongoose Connection
-mongoose.connect(`mongodb+srv://Garv:${process.env.MONGO_PASSWORD}@sheets.sizfdlc.mongodb.net/?retryWrites=true&w=majority`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+dotenv.config();
+
+connectDB();
+
+
+
 
 // Express Setup
 const app = express();
 app.use(express.json());
+
 app.use(
   cors({
     origin: ["http://localhost:3000", "https://sheets-theta.vercel.app"],
